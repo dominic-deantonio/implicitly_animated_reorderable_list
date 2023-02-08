@@ -1,0 +1,15 @@
+
+.dart_tool/package_config.json
+.dart_tool/package_config_subset
+.dart_tool/version
+example/.dart_tool/dartpad/web_plugin_registrant.dart
+example/.dart_tool/package_config.json
+example/.dart_tool/package_config_subset
+example/.dart_tool/version
+example/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+example/android/local.properties
+example/ios/Flutter/flutter_export_environment.sh
+example/ios/Flutter/Generated.xcconfig
+example/ios/Runner/GeneratedPluginRegistrant.h
+example/ios/Runner/GeneratedPluginRegistrant.m
+example/pubspec.lock

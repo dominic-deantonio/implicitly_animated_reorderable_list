@@ -116,6 +116,8 @@ class ImplicitlyAnimatedList<E extends Object> extends StatelessWidget {
   /// Defaults to false.
   final bool shrinkWrap;
 
+  final double? cacheExtent;
+
   /// The amount of space by which to inset the children.
   final EdgeInsetsGeometry? padding;
 
@@ -139,6 +141,7 @@ class ImplicitlyAnimatedList<E extends Object> extends StatelessWidget {
     this.physics,
     this.shrinkWrap = false,
     this.padding,
+    this.cacheExtent,
   }) : super(key: key);
 
   @override
@@ -150,6 +153,7 @@ class ImplicitlyAnimatedList<E extends Object> extends StatelessWidget {
       primary: primary,
       physics: physics,
       shrinkWrap: shrinkWrap,
+      cacheExtent: cacheExtent,
       slivers: <Widget>[
         SliverPadding(
           padding: padding ?? const EdgeInsets.all(0),
@@ -171,8 +175,7 @@ class ImplicitlyAnimatedList<E extends Object> extends StatelessWidget {
 }
 
 /// A Flutter Sliver that implicitly animates between the changes of two lists.
-class SliverImplicitlyAnimatedList<E extends Object>
-    extends ImplicitlyAnimatedListBase<Widget, E> {
+class SliverImplicitlyAnimatedList<E extends Object> extends ImplicitlyAnimatedListBase<Widget, E> {
   /// Creates a Flutter Sliver that implicitly animates between the changes of two lists.
   ///
   /// {@template implicitly_animated_reorderable_list.constructor}
@@ -220,22 +223,17 @@ class SliverImplicitlyAnimatedList<E extends Object>
         );
 
   @override
-  _SliverImplicitlyAnimatedListState<E> createState() =>
-      _SliverImplicitlyAnimatedListState<E>();
+  _SliverImplicitlyAnimatedListState<E> createState() => _SliverImplicitlyAnimatedListState<E>();
 }
 
-class _SliverImplicitlyAnimatedListState<E extends Object>
-    extends ImplicitlyAnimatedListBaseState<Widget,
-        SliverImplicitlyAnimatedList<E>, E> {
+class _SliverImplicitlyAnimatedListState<E extends Object> extends ImplicitlyAnimatedListBaseState<Widget, SliverImplicitlyAnimatedList<E>, E> {
   @override
   Widget build(BuildContext context) {
     return CustomSliverAnimatedList(
       key: animatedListKey,
       initialItemCount: newList.length,
       itemBuilder: (context, index, animation) {
-        final E? item = data.getOrNull(index) ??
-            newList.getOrNull(index) ??
-            oldList.getOrNull(index);
+        final E? item = data.getOrNull(index) ?? newList.getOrNull(index) ?? oldList.getOrNull(index);
         final didChange = changes[item] != null;
 
         if (item == null) {
